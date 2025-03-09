@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าชำระเงิน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        .cart-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .next-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .next-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">หน้าชำระเงิน</h1>
+
+    <div class="cart-container">
+        <div id="cart-items"></div>
+        <div class="total">
+            รวม: <span id="total-amount">0</span> บาท
+        </div>
+        <button class="next-btn" onclick="location.href='shipping.html'">ดำเนินการต่อไปที่หน้ากรอกที่อยู่</button>
+    </div>
+
+    <script>
+        // ดึงข้อมูลจาก localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalAmount = 0;
+
+        function updateCart() {
+            let cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+
+            cart.forEach(item => {
+                totalAmount += item.price;
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.product}</span>
+                        <span>${item.price} บาท</span>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total-amount').textContent = totalAmount;
+        }
+
+        updateCart();
+    </script>
+
+</body>
+</html>

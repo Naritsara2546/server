@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าเลือกสินค้า</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .product p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .add-to-cart-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #45a049;
+        }
+
+        .cart-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">เลือกสินค้าของคุณ</h1>
+    
+    <div class="product-container">
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Product 1">
+            <h3>สินค้า 1</h3>
+            <p>ราคา: 300 บาท</p>
+            <button class="add-to-cart-btn" onclick="addToCart('สินค้า 1', 300)">เพิ่มไปยังตะกร้า</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Product 2">
+            <h3>สินค้า 2</h3>
+            <p>ราคา: 500 บาท</p>
+            <button class="add-to-cart-btn" onclick="addToCart('สินค้า 2', 500)">เพิ่มไปยังตะกร้า</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/150" alt="Product 3">
+            <h3>สินค้า 3</h3>
+            <p>ราคา: 750 บาท</p>
+            <button class="add-to-cart-btn" onclick="addToCart('สินค้า 3', 750)">เพิ่มไปยังตะกร้า</button>
+        </div>
+    </div>
+
+    <div class="cart-link">
+        <a href="chekout.html">ไปที่หน้าชำระเงิน</a>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            alert(`${product} ได้รับการเพิ่มไปยังตะกร้า`);
+        }
+
+        // การเก็บตะกร้าไว้ใน localStorage (เมื่อโหลดใหม่จะเก็บข้อมูลตะกร้า)
+        window.onload = function () {
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
+            }
+        }
+
+        // การบันทึกข้อมูลตะกร้าใน localStorage
+        window.onbeforeunload = function () {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    </script>
+
+</body>
+</html>
